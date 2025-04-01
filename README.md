@@ -1,2 +1,2 @@
-# Prueba-t-cnica---Auronix
+# Prueba-tecnica---Auronix
 Ejercicio para consumir una API
