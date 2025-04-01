@@ -33,7 +33,7 @@ https://prueba-tecnica-auronix-production.up.railway.app/characters/status/unkno
 ### Ruta para obtener todos los personajes
 https://prueba-tecnica-auronix-production.up.railway.app/characters/all
 ### Ruta para buscar a un personaje por su id
-https://prueba-tecnica-auronix-production.up.railway.app/id/1
+https://prueba-tecnica-auronix-production.up.railway.app/characters/id/1
 #### Nota: Todas las rutas tienen los campos y el formato del nombre como dice en el reto
 #### Nota: En caso de correr la aplicación en otro puerto que no sea 3000 cambia ese valor
 
