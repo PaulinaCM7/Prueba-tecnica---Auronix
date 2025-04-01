@@ -14,7 +14,7 @@ export class AppService {
   private readonly logger = new Logger(AppService.name);
   constructor(private httpService: HttpService) {}
 
-  getCharacters() {
+  getStatusCharacters(status: string) {
     return this.httpService
       .get('https://rickandmortyapi.com/api/character')
       .pipe(
@@ -26,7 +26,7 @@ export class AppService {
         }),
         map((data) => ({
           results: data.results
-            .filter((character: Character) => character.status === 'Alive')
+            .filter((character: Character) => character.status === status)
             .map((character: Character) => ({
               id: character.id,
               name: character.name.replace(/\s/g, '_'),
@@ -42,6 +42,48 @@ export class AppService {
             data: error.response?.data,
           }));
           return throwError(() => new Error('Error al obtener los personajes'));
+        })
+      );
+  }
+
+  getAllCharacters() {
+    return this.httpService
+      .get('https://rickandmortyapi.com/api/character')
+      .pipe(
+        map((response) => {
+          if (!response.data?.results) {
+            throw new Error('Formato de datos inesperado');
+          }
+          return response.data.results.map((character: Character) => ({
+            id: character.id,
+            name: character.name.replace(/\s/g, '_'),
+            status: character.status,
+            gender: character.gender,
+          }));
+        }),
+        catchError((error) => {
+          this.logger.error(`Error al obtener todos los personajes`, error.stack);
+          return throwError(() => new Error('Error al obtener los personajes'));
+        })
+      );
+  }
+
+  getCharacterById(id: number) {
+    return this.httpService
+      .get(`https://rickandmortyapi.com/api/character/${id}`)
+      .pipe(
+        map((response) => {
+          const character = response.data;
+          return {
+            id: character.id,
+            name: character.name.replace(/\s/g, '_'),
+            status: character.status,
+            gender: character.gender,
+          };
+        }),
+        catchError((error) => {
+          this.logger.error(`Error al obtener personaje con ID ${id}`, error.stack);
+          return throwError(() => new Error('Error al obtener el personaje'));
         })
       );
   }

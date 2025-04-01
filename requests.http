@@ -1,1 +1,23 @@
-http://localhost:3000
+# Se obtienen los datos del reto
+# Los personajes que estan vivos, con sus campos correspondientes
+# Y los espacios en los nombres de cambian a guiones bajos
+GET http://localhost:3000/characters/status/Alive
+
+###
+
+# Adicionalmente se pueden obtener los personajes con status de Dead y unknown
+GET http://localhost:3000/characters/status/Dead
+
+###
+
+GET http://localhost:3000/characters/status/unknown
+
+###
+
+# Tambien se obtienen todos los personajes siguiendo el mismo formato
+GET http://localhost:3000/characters/all
+
+###
+
+# O se puede buscar un personaje individual por su id siguiendo el mismo formato
+GET http://localhost:3000/characters/id/1
