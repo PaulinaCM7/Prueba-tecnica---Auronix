@@ -15,6 +15,9 @@ export class AppService {
   constructor(private httpService: HttpService) {}
 
   getStatusCharacters(status: string) {
+    if (!['Alive', 'Dead', 'unknown'].includes(status)) {
+      throw new Error('El estado proporcionado no es válido');
+    }
     return this.httpService
       .get('https://rickandmortyapi.com/api/character')
       .pipe(
