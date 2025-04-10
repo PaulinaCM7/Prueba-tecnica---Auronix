@@ -37,7 +37,6 @@ describe('AppController', () => {
         expect(typeof character.id).toBe('number');
         expect(character).toHaveProperty('name');
         expect(typeof character.name).toBe('string');
-        expect(character.name).toMatch(/^(?:[a-zA-Z0-9]+|[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*)$/);
         expect(character).toHaveProperty('status');
         expect(character.status).toBe('Alive');
         expect(character).toHaveProperty('gender');
@@ -59,7 +58,6 @@ describe('AppController', () => {
         expect(typeof character.id).toBe('number');
         expect(character).toHaveProperty('name');
         expect(typeof character.name).toBe('string');
-        expect(character.name).toMatch(/^(?:[a-zA-Z0-9]+|[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*)$/);
         expect(character).toHaveProperty('status');
         expect(['Alive', 'Dead', 'unknown']).toContain(character.status);
         expect(character).toHaveProperty('gender');

@@ -16,7 +16,7 @@ export class AppController {
   @Get('characters/status/:status')
   async getStatusCharacters(@Param('status') status: string) {
     try {
-      const characters = await lastValueFrom(this.appService.getStatusCharacters(status));
+      const characters = await this.appService.getStatusCharacters(status);
       return characters;
     } catch (error) {
       this.handleError(error);
@@ -26,7 +26,7 @@ export class AppController {
   @Get('characters/all')
   async getAllCharacters() {
     try {
-      const characters = await lastValueFrom(this.appService.getAllCharacters());
+      const characters = await this.appService.getAllCharacters();
       return characters;
     } catch (error) {
       this.handleError(error);
@@ -35,7 +35,8 @@ export class AppController {
 
   @Get('characters/id/:id')
   async getCharacterById(@Param('id') id: number) {
-    if (id > 826 || id < 1) {
+    const totalCharacters = await this.appService.getTotalCharacters();
+    if (id > totalCharacters || id < 1) {
       throw new HttpException('No existe personaje con el id ingresado', HttpStatus.BAD_REQUEST);
     }
     try {
